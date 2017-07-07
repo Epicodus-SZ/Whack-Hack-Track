@@ -13,6 +13,10 @@ public class Member {
     mId = instances.size();
   }
 
+  public String email(){
+    return mEmail;
+  }
+  
   public static List<Member> getAll(){
     return instances;
   }
