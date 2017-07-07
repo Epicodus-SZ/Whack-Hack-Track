@@ -31,10 +31,20 @@ public class Team {
   }
 
   public void addMember(Member member){
+    if (!mMembers.contains(member)){
       mMembers.add(member);
+    }
   }
 
   public static Team find(int id){
     return instances.get(id-1); //minus 1 because the ID is based on size, but the location in array is zero-based
+  }
+
+  public void clearMembers(){
+    mMembers.clear();
+  }
+
+  public static void clearTeams(){
+    instances.clear();
   }
 }

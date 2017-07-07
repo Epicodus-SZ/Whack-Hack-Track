@@ -16,6 +16,7 @@ public class App {
     Team testTeam3 = new Team("The Snacks Overflow");
     Member default1 = new Member("steve@zaske.com");
     Member default2 = new Member("billg@microsoft.com");
+    Member default3 = new Member("hulk@marvel.com");
     testTeam2.addMember(default1);
     testTeam2.addMember(default2);
 
@@ -39,6 +40,29 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       Team team = Team.find(Integer.parseInt(request.params(":id")));
       model.put("team", team);
+      model.put("template", "templates/team.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/teams/:id/assign", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Team team = Team.find(Integer.parseInt(request.params(":id")));
+      model.put("members", Member.getAll());
+      model.put("team", team);
+      model.put("template", "templates/assign.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/teams/:id/assign", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Team team = Team.find(Integer.parseInt(request.params(":id")));
+      model.put("team", team);
+
+      for (String memID : request.queryParams()){
+        Member member = Member.find(Integer.parseInt(memID));
+        team.addMember(member);
+      }
+
       model.put("template", "templates/team.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

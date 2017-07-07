@@ -1,0 +1,20 @@
+<!--assign.vtl-->
+<h1>Assign to team: $team.name()</h1>
+
+#foreach ($member in $team.allMembers())
+  $member.email() <br>
+#end
+
+<form method="post">
+  <label for="name">Members:</label><br>
+  #foreach ($mem in $members)
+    <input type="checkbox" name="$mem.id()" value="$mem.email()"  #if($team.allMembers().contains($mem))
+      checked
+    #else
+    #end
+    >$mem.email()<br>
+  #end
+  <button type="submit" class="btn btn-success">Assign members</button>
+</form>
+
+<!--assign.vtl-->
