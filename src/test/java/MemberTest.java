@@ -16,9 +16,29 @@ public class MemberTest {
 
   @Test
   public void getAll_returnsAllMembers_3() {
+    Member.clearMembers();
     Member testMember1 = new Member("steve@zaske3.com");
     Member testMember2 = new Member("miketyson@mma.com");
     Member testMember3 = new Member("billg@microsoft.com");
     assertEquals(3, Member.getAll().size());
   }
+
+  @Test
+  public void clearMembers_clearsAllExistingMembers_0() {
+    Member testMember1 = new Member("steve@zaske3.com");
+    Member testMember2 = new Member("miketyson@mma.com");
+    Member testMember3 = new Member("billg@microsoft.com");
+    Member.clearMembers();
+    assertEquals(0, Member.getAll().size());
+  }
+
+  @Test
+  public void find_returnsCorrectMember_testMember3() {
+    Member.clearMembers();
+    Member testMember1 = new Member("steve@zaske3.com");
+    Member testMember2 = new Member("miketyson@mma.com");
+    Member testMember3 = new Member("billg@microsoft.com");
+    assertEquals(testMember3, Member.find(3));
+  }
+
 }

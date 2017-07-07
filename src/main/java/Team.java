@@ -31,6 +31,7 @@ public class Team {
   }
 
   public void addMember(Member member){
+    //if check so we don't duplicate members on a team
     if (!mMembers.contains(member)){
       mMembers.add(member);
     }
