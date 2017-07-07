@@ -21,8 +21,23 @@ public class App {
     testTeam2.addMember(default2);
 
     //list all members
-    get("members", (request, response) -> {
+    get("/members", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      model.put("members", Member.getAll());
+      model.put("template", "templates/members.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/members/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/members-new.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/members/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String memberEmail = request.queryParams("email");
+      Member member = new Member(memberEmail);
       model.put("members", Member.getAll());
       model.put("template", "templates/members.vtl");
       return new ModelAndView(model, layout);
@@ -57,15 +72,16 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       Team team = Team.find(Integer.parseInt(request.params(":id")));
       model.put("team", team);
-
+      team.clearMembers();
       for (String memID : request.queryParams()){
         Member member = Member.find(Integer.parseInt(memID));
         team.addMember(member);
       }
-
       model.put("template", "templates/team.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+
 
   } //end of main
 } //end of App class
