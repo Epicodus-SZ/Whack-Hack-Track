@@ -5,12 +5,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class App {
-  public static void main(String[] args) {
-    //sets the default file location
-    staticFileLocation("/public");
-    String layout = "templates/layout.vtl";
 
-    //Add dummy default data
+  public static void dummyData(){
     Team testTeam1 = new Team("The Justice League");
     Team testTeam2 = new Team("The Avengers");
     Team testTeam3 = new Team("Suicide Squad");
@@ -22,7 +18,17 @@ public class App {
     testTeam1.addMember(default4);
     testTeam2.addMember(default2);
     testTeam2.addMember(default3);
+  }
 
+  public static void main(String[] args) {
+    //sets the default file location
+    staticFileLocation("/public");
+    String layout = "templates/layout.vtl";
+
+    //Add dummy default data
+    dummyData();
+
+    //Heroku code
     ProcessBuilder process = new ProcessBuilder();
     Integer port;
     if (process.environment().get("PORT") != null) {
@@ -30,10 +36,8 @@ public class App {
     } else {
        port = 4567;
     }
-
     setPort(port);
-
-
+    //end of Heroku code
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -123,6 +127,16 @@ public class App {
       model.put("members", Member.getAll());
       model.put("teams", Team.getAll());
       model.put("template", "templates/hackathon.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/reset", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Team.clearTeams();
+      Member.clearMembers();
+      dummyData();
+      model.put("teams", Team.getAll());
+      model.put("template", "templates/teams.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
