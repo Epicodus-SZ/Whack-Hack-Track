@@ -49,6 +49,14 @@ public class TeamTest {
   }
 
   @Test
+  public void find_returnsTheCorrectTeam() {
+    Team.clearTeams();
+    Team testTeam = new Team("Flogging Mollys");
+    Team testTeam2 = new Team("The Beatles");
+    assertEquals(testTeam2.name(), Team.find(2).name());
+  }
+
+  @Test
   public void allMembers_returnsAllMembers() {
     Team testTeam = new Team("Five Bunnys");
     Member default1 = new Member("steve@zaske.com");

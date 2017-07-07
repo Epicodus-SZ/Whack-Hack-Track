@@ -1,0 +1,18 @@
+.linked:hover {
+  text-decoration:none;
+  color: #e226b0;
+  cursor: pointer;
+}
+
+.linked {
+  text-decoration: underline;
+  color: #1aba09;
+}
+
+.card{
+  display: none;
+}
+
+.title {
+  font-family: 'Slackey', cursive;
+}

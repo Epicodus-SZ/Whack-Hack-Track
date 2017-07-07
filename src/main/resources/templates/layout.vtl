@@ -2,16 +2,20 @@
 <html>
   <head>
     <title>Whack-Hack-Track</title>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link href="https://fonts.googleapis.com/css?family=Slackey" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
   </head>
   <body>
   <!--begin main template-->
     <div class="container">
+      <h1 class="title">Whack-Hack-Track</h1>
+        <p>A dope hackathon tracker.</p>
       #parse( $template )
+
+      <br>
+      <a href="/hackathon">Hackathon Info</a> | <a href="/teams">View All Teams</a> | <a href="/members">View All Participants</a>
     </div>
     <!--end main template-->
-    <br>
-    <a href="/teams">View All Teams</a> | <a href="/members">View All Participants</a>
-
   </body>
 </html>

@@ -23,6 +23,25 @@ public class App {
     testTeam2.addMember(default2);
     testTeam2.addMember(default3);
 
+    ProcessBuilder process = new ProcessBuilder();
+    Integer port;
+    if (process.environment().get("PORT") != null) {
+       port = Integer.parseInt(process.environment().get("PORT"));
+    } else {
+       port = 4567;
+    }
+
+    setPort(port);
+
+
+
+    get("/", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("teams", Team.getAll());
+      model.put("template", "templates/teams.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     //list all members
     get("/members", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -99,7 +118,13 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-
+    get("/hackathon", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("members", Member.getAll());
+      model.put("teams", Team.getAll());
+      model.put("template", "templates/hackathon.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
   } //end of main
 } //end of App class

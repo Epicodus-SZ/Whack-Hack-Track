@@ -1,0 +1,29 @@
+<!--hackathon.vtl-->
+
+
+<h3>Science Hack Day Portland 2017</h3>
+<h4>Monday, July 10, 2017 from 6–9:30pm</h4>
+
+<p>A weekend making fun science projects.
+
+Designers, students, engineers, programmers, scientists, artists, and science-enthusiasts! Excited about making weird, silly or serious things with science? Anyone who is excited about making things with science are welcome to attend. No experience in science or hacking is necessary - just an insatiable curiosity.
+
+Wifi, 3D printers, and basic electronic prototyping equipment (soldering irons, Arduinos, etc) will be available. For more demanding projects we can help facilitate access to specific tools for your prototype.
+
+All skill levels, ages, and backgrounds are welcome. Children must be accompanied by at least one adult.
+
+You don't need a team, project, or idea to attend. Just show up and we will help you find an interesting project to work on!</p>
+<br>
+
+  <h3>Participants:</h3>
+  #foreach ($team in $teams)
+  <h4>$team.name()</h4>
+  <ul>
+  #foreach ($member in $team.allMembers())
+    <li>$member.email()</li>
+  #end
+  </ul>
+    <br>
+  #end
+
+<!--hackathon.vtl-->
