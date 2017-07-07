@@ -1,0 +1,9 @@
+<!--team.vtl-->
+<h1>Team: $team.name()</h1>
+<ul>
+  #foreach ($member in $team.allMembers())
+    <li><a href="/members/$member.id()">$member.email()</a></li>
+  #end
+</ul>
+<a href="/teams/new">Add New Member</a>
+<!--team.vtl-->

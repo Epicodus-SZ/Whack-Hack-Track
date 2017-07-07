@@ -16,9 +16,13 @@ public class Member {
   public String email(){
     return mEmail;
   }
-  
+
   public static List<Member> getAll(){
     return instances;
+  }
+
+  public int id(){
+    return mId;
   }
 
 }
